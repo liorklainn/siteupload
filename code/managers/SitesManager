@@ -1,0 +1,16 @@
+
+
+
+var sitesDAL = require('../dal/SitesDAL');
+
+module.exports = {
+    saveSite: function (site) {
+        //console.log('SitesManager saving site  ' + JSON.stringify(site));
+        sitesDAL.saveSite(site);
+    },
+
+    saveSiteOwner: function(siteUuid, ownerEmail) {
+        //console.log('SitesManager saving site owner ' + siteUuid + ' ' + ownerEmail);
+        sitesDAL.saveSiteOwner(siteUuid,ownerEmail);
+    }
+}
