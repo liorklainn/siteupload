@@ -73,6 +73,7 @@ module.exports = {
                 // Check if record exists in db
                 if (site) {
 
+                    //update site's owner in the db
                     site.updateAttributes({
                             ownerEmail: ownerEmail
                         })
