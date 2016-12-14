@@ -21,6 +21,7 @@ $('#upload-input').on('change', function(){
             formData.append('uploads[]', file, file.name);
         }
 
+        var ownerEmail = $("#ownerEmailInput").val();
 
         $.ajax({
             url: '/upload',
@@ -31,7 +32,8 @@ $('#upload-input').on('change', function(){
 
             success: function(data){
                 console.log('upload successful!\n' + data);
-                var ownerEmail = 'test-from-code@gmail.com';
+
+
                 $.ajax({
                     url: '/saveSiteOwner?siteId=' + data + '&ownerEmail=' + ownerEmail,
                     type: 'GET',
