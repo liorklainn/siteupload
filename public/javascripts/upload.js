@@ -8,10 +8,6 @@ function clearFinishStatus()
 
 }
 
-$('#successMsg').onfocus(function() {
-    $('#successMsg').hide();
-});
-
 $('.upload-btn').on('click', function (){
     clearFinishStatus();
     $('#upload-input').click();
