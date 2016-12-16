@@ -1,4 +1,19 @@
+$(document).ready(function(){
+    clearFinishStatus();
+});
+
+function clearFinishStatus()
+{
+    $('#successMsg').hide();
+
+}
+
+$('#successMsg').onfocus(function() {
+    $('#successMsg').hide();
+});
+
 $('.upload-btn').on('click', function (){
+    clearFinishStatus();
     $('#upload-input').click();
     $('.progress-bar').text('0%');
     $('.progress-bar').width('0%');
@@ -38,7 +53,10 @@ $('#upload-input').on('change', function(){
                     url: '/saveSiteOwner?siteId=' + data + '&ownerEmail=' + ownerEmail,
                     type: 'GET',
                     contentType:'application/json',
-                    success: function(data) { console.log('save site owner success');},
+                    success: function(data) {
+                        console.log('save site owner success');
+
+                    },
                     error: function(data) { console.error('save site owner failed');}
                 });
 
@@ -62,9 +80,10 @@ $('#upload-input').on('change', function(){
                         // once the upload reaches 100%, set the progress bar text to done
                         if (percentComplete === 100) {
                             $('.progress-bar').html('Done');
-
+                            $('#successMsg').show();
+                            // clear email box
+                            $("#ownerEmailInput").val('');
                         }
-
                     }
 
                 }, false);
