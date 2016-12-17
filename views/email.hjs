@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+<body>
+<h1>Your Site Is Up and ready for Demo</h1>
+<br>
+<b>Your Site Link:</b>
+<br>
+<a href={{ siteURL }}>{{ siteURL }}</a>
+<br>
+<b>Will be deleted on:</b>
+<br>
+<p>7 days from today</p>
+<br>
+</body>
+</html>

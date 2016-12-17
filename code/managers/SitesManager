@@ -13,7 +13,7 @@ module.exports = {
     saveSiteOwner: function(siteUuid, ownerEmail) {
         //console.log('SitesManager saving site owner ' + siteUuid + ' ' + ownerEmail);
         sitesDAL.saveSiteOwner(siteUuid,ownerEmail);
-
-        mailManager.sendMail(ownerEmail,"Your Web Site is up", "This is the link to your website:");
+        var siteURL = "http://www.showoffweb.com/sites/" + siteUuid;
+        mailManager.sendNewSiteToOwner(ownerEmail,siteURL);
     }
 }

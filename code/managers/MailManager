@@ -1,6 +1,7 @@
 
 
 var nodemailer = require('nodemailer');
+var cons = require('consolidate');
 
 
 var smtpConfig = {
@@ -23,26 +24,37 @@ transporter.verify(function(error, success) {
     }
 });
 
+var sendMail =  function (recipient, subject,body) {
+    console.log(recipient + ' ' + subject + ' ' + body);
+
+    var mailOptions = {
+        from: 'mailer@showoffweb.com', // sender address
+        to: [recipient], // list of receivers
+        subject: subject, // Subject line
+        //text: 'Hello world 🐴', // plaintext body
+        html: body // html body
+    };
+
+    transporter.sendMail(mailOptions, function(error, info){
+        if(error){
+            return console.log(error);
+        }
+        console.log('Message sent: ' + info.response);
+    });
+};
 
 module.exports = {
-    sendMail: function (recipient, subject,body) {
-        console.log(recipient + ' ' + subject + ' ' + body);
+    sendNewSiteToOwner: function(recipient,siteURL)
+    {
+        console.log('sendNewSiteToOwner start');
+        var emailSubject = 'Your Site is Up';
+        //var emailBodyTemplate = hogan.compile('../../views/email.hjs');
+        //var body = template.render(data);
+        cons.hogan('views/email.hjs', { siteURL: siteURL }, function(err, html){
+            if (err) throw err;
 
-        var mailOptions = {
-            from: 'mailer@showoffweb.com', // sender address
-            to: [recipient], // list of receivers
-            subject: subject, // Subject line
-            //text: 'Hello world 🐴', // plaintext body
-            html: body // html body
-        };
-
-        transporter.sendMail(mailOptions, function(error, info){
-            if(error){
-                return console.log(error);
-            }
-            console.log('Message sent: ' + info.response);
+            console.log('Email body: ' + html);
+            sendMail(recipient,emailSubject,html );
         });
     }
-
-
 }
