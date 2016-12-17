@@ -28,7 +28,7 @@ var sendMail =  function (recipient, subject,body) {
     console.log(recipient + ' ' + subject + ' ' + body);
 
     var mailOptions = {
-        from: 'mailer@showoffweb.com', // sender address
+        from: 'ShowOff Web <mailer@showoffweb.com>', // sender address
         to: [recipient], // list of receivers
         subject: subject, // Subject line
         //text: 'Hello world 🐴', // plaintext body
@@ -48,12 +48,10 @@ module.exports = {
     {
         console.log('sendNewSiteToOwner start');
         var emailSubject = 'Your Site is Up';
-        //var emailBodyTemplate = hogan.compile('../../views/email.hjs');
-        //var body = template.render(data);
+
         cons.hogan('views/email.hjs', { siteURL: siteURL }, function(err, html){
             if (err) throw err;
 
-            console.log('Email body: ' + html);
             sendMail(recipient,emailSubject,html );
         });
     }
