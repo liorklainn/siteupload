@@ -7,6 +7,7 @@ var fs = require('fs');
 var unzip = require('unzip');
 const cuid = require('cuid');
 var sitesManager = require('../code/managers/SitesManager');
+var siteFolderManager = require('../code/managers/SiteFolderManager');
 
 /* GET home page. */
 //router.get('/:id', function(req, res, next) {
@@ -38,7 +39,11 @@ router.post('/upload', function(req, res){
     var uuid = cuid();
     var extractPath = path.join(form.uploadDir, uuid);
     fs.renameSync(file.path, zipFilePath);
-    fs.createReadStream(zipFilePath).pipe(unzip.Extract({ path: extractPath }));
+
+    fs.createReadStream(zipFilePath).pipe(unzip.Extract({ path: extractPath })).on('close',function() {
+      console.log('extract path before sending to organize ' + extractPath);
+      siteFolderManager.organizeSiteFolder(extractPath);
+    });
 
 
     var createDate = new Date();
