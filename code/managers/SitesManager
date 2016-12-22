@@ -1,7 +1,7 @@
 
 
 
-var sitesDAL = require('../dal/SitesDAL');
+var sitesDAL = require('../dal/SitesLocalDAL');
 var mailManager = require('./MailManager');
 
 module.exports = {
@@ -15,5 +15,13 @@ module.exports = {
         sitesDAL.saveSiteOwner(siteUuid,ownerEmail);
         var siteURL = "http://www.showoffweb.com/sites/" + siteUuid;
         mailManager.sendNewSiteToOwner(ownerEmail,siteURL);
+
+
+        // TODO: remove
+        sitesDAL.getAll().then(function(sites) {
+            console.log('all sites after save:' + JSON.stringify(sites));
+        });
+
+
     }
 }

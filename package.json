@@ -20,6 +20,7 @@
     "nodemailer": "^2.7.0",
     "sequelize": "^3.27.0",
     "serve-favicon": "~2.3.0",
+    "sqlite3": "^3.1.8",
     "unzip": "^0.1.11",
     "uuid": "^3.0.1"
   }

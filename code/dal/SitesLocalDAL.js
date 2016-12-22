@@ -2,31 +2,10 @@
  * Created by Lior Klain on 12/14/2016.
  */
 
-//sitesCREATE TABLE `sites` (
-//    `id` int(11) NOT NULL AUTO_INCREMENT,
-//    `uuid` varchar(100) NOT NULL,
-//    `virtual_path` varchar(500) NOT NULL,
-//    `pysical_path` varchar(500) NOT NULL,
-//    `owner_email` varchar(255) NOT NULL,
-//    `create_date` datetime NOT NULL,
-//    `due_date` datetime NOT NULL,
-//    PRIMARY KEY (`id`),
-//    KEY `uuid_index` (`uuid`),
-//    KEY `email_index` (`owner_email`)
-//) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=latin1;
-//SELECT * FROM TestDB.persistent_logins;
-
 var Sequelize = require('sequelize');
 var sequelize = new Sequelize('SiteUploadDB', 'lior', 'q1w2e3r4', {
-    host: 'mysqltest.cwjtaiu3wfr5.us-east-1.rds.amazonaws.com',
-    port: 3306,
-    dialect: 'mysql',
-
-    pool: {
-        max: 5,
-        min: 0,
-        idle: 10000
-    }
+    dialect: 'sqlite',
+    storage: 'localdb/SiteUploadDB.sqlite',
 });
 
 var sitesModel = sequelize.define('sites',{
@@ -70,6 +49,8 @@ var sitesModel = sequelize.define('sites',{
         timestamps: false
     }
 );
+
+sequelize.sync();
 
 module.exports = {
     saveSite: function (site) {
