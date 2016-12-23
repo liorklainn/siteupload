@@ -23,9 +23,19 @@
                     <div class="progress">
                         <div class="progress-bar" role="progressbar"></div>
                     </div>
-                    <input id="ownerEmailInput" type="text" placeholder="Your Email" style="width:60%"/> <br><br>
-                    <span id="successMsg" >Your Site link Email has been sent Your site is available for 7 days </span><br><br>
+                    <input id="ownerEmailInput" type="text" placeholder="Your Email" style="width:60%"/>
+                    <br><br>
+                    <div  id="emailMustBeFilledMsg" class="alert alert-danger">
+                        You must fill your email in order to get the link of your site
+                    </div>
+                    <div id="successMsg" class="alert alert-success" >Your Site link Email has been sent Your site is available for 7 days </div>
                     <button class="btn btn-lg upload-btn" type="button">Upload Site (Zipped)</button>
+                    <br><br>
+
+                    <div  id="fileSizeToBigMsg" class="alert alert-danger">
+                        Zip size should be less than 100 Mb - if you want to upload bigger site please contact us
+                    </div>
+                    <br><br>
                 </div>
             </div>
         </div>

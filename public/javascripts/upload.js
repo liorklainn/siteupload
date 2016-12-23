@@ -5,18 +5,34 @@ $(document).ready(function(){
 function clearFinishStatus()
 {
     $('#successMsg').hide();
-
+    $('#fileSizeToBigMsg').hide();
+    $('#emailMustBeFilledMsg').hide();
 }
 
 $('.upload-btn').on('click', function (){
     clearFinishStatus();
+
+    if (!$("#ownerEmailInput").val())
+    {
+        $('#emailMustBeFilledMsg').show();
+        return;
+    }
+
     $('#upload-input').click();
     $('.progress-bar').text('0%');
     $('.progress-bar').width('0%');
 });
 
-$('#upload-input').on('change', function(){
+$('#ownerEmailInput').on('keyup', function(){
 
+    if ($("#ownerEmailInput").val())
+    {
+        $('#emailMustBeFilledMsg').hide();
+    }
+});
+
+
+$('#upload-input').on('change', function(){
     var files = $(this).get(0).files;
 
     if (files.length > 0){
@@ -24,13 +40,21 @@ $('#upload-input').on('change', function(){
         // AJAX request
         var formData = new FormData();
 
-        // loop through all the selected files and add them to the formData object
-        for (var i = 0; i < files.length; i++) {
-            var file = files[i];
+        // get first file only
+        var file = files[0];
 
-            // add the files to formData object for the data payload
+        if (file.size < 100000000)
+        {
+            // add the file to formData object for the data payload
             formData.append('uploads[]', file, file.name);
         }
+        else
+        {
+            $('#fileSizeToBigMsg').show();
+            return;
+        }
+
+
 
         var ownerEmail = $("#ownerEmailInput").val();
 
